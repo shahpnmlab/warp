@@ -67,9 +67,6 @@ namespace WarpTools.Commands
         [Option("full_covered_voxels", Default = true, HelpText = "Keep only fully covered voxels during matching")]
         public bool FullCoveredVoxels { get; set; } = true;
 
-        [Option("dont_use_fully_covered_voxels", HelpText = "Do not keep only fully covered voxels during matching")]
-        public bool NoFullCoveredVoxels { get; set; }
-
         [Option("lowpass_sigma", Default = 0.1, HelpText = "Sigma (i.e. fall-off) of the Gaussian low-pass filter, in fractions of Nyquist; larger value = slower fall-off")]
         public double LowpassSigma { get; set; }
 
@@ -181,7 +178,7 @@ namespace WarpTools.Commands
             OptionsMatch.TiltRange = CLI.TiltRange != null ? (decimal)CLI.TiltRange.Value : -1;
             OptionsMatch.SubVolumeSize = CLI.SubVolumeSize;
             OptionsMatch.Supersample = 1;
-            OptionsMatch.KeepOnlyFullVoxels = CLI.NoFullCoveredVoxels ? false : CLI.FullCoveredVoxels;
+            OptionsMatch.KeepOnlyFullVoxels = !CLI.FullCoveredVoxels;
             OptionsMatch.NormalizeScores = !CLI.DontNormalizeScores;
             OptionsMatch.Lowpass = (decimal)CLI.Lowpass;
             OptionsMatch.LowpassSigma = (decimal)CLI.LowpassSigma;
