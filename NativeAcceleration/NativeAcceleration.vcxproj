@@ -204,9 +204,6 @@
     <CudaCompile Include="gtom\src\Projection\RaySum.cu" />
     <CudaCompile Include="gtom\src\Projection\Weighting.cu" />
     <CudaCompile Include="gtom\src\Reconstruction\RecFourier.cu" />
-    <CudaCompile Include="gtom\src\Reconstruction\RecFourierAdd.cu" />
-    <CudaCompile Include="gtom\src\Reconstruction\RecSIRT.cu" />
-    <CudaCompile Include="gtom\src\Reconstruction\RecWBP.cu" />
     <CudaCompile Include="gtom\src\Relion\Backproject.cu" />
     <CudaCompile Include="gtom\src\Relion\BackprojectShifted.cu" />
     <CudaCompile Include="gtom\src\Relion\BackprojectTomo.cu" />
@@ -246,6 +243,7 @@
     <CudaCompile Include="src/RealspaceProjection.cu" />
     <CudaCompile Include="src/Raycast.cu" />
     <CudaCompile Include="src\DFT.cu" />
+    <CudaCompile Include="src\Helical.cu" />
     <CudaCompile Include="src\Motion.cu" />
     <CudaCompile Include="src/MPARefine.cu" />
     <CudaCompile Include="src/Tools.cu" />
