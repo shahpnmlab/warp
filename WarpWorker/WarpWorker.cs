@@ -427,11 +427,13 @@ namespace WarpWorker
                     // we execute batchruntomo even if not doing patch tracking to create com file for alignment
 
                     bool IsWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+                    string BatchRunTomoExecutable = IsWindows ? "batchruntomo.cmd" : "batchruntomo";
+                    Console.WriteLine($"Running '{BatchRunTomoExecutable} {Arguments}'");
                     Process BatchRunTomo = new Process 
                     {
                         StartInfo =
                         {
-                            FileName = IsWindows ? "batchruntomo.cmd" : "batchruntomo",
+                            FileName = BatchRunTomoExecutable,
                             CreateNoWindow = false,
                             WindowStyle = ProcessWindowStyle.Minimized,
                             Arguments = Arguments,
@@ -455,11 +457,13 @@ namespace WarpWorker
                     if (Options.DoTiltAlign)
                     {
                         Console.WriteLine($"Calculating projection parameters from patch tracking results in {T.TiltStackDir}");
+                        string SubMfgExecutable = IsWindows ? "submfg.cmd" : "submfg";
+                        Console.WriteLine($"Running '{SubMfgExecutable} align.com'");
                         Process TiltAlign = new Process
                         {
                             StartInfo =
                             {
-                                FileName = IsWindows ? "submfg.cmd" : "submfg",
+                                FileName = SubMfgExecutable,
                                 CreateNoWindow = false,
                                 WindowStyle = ProcessWindowStyle.Minimized,
                                 Arguments = "align.com",
@@ -501,7 +505,7 @@ namespace WarpWorker
                                     $"comparam.xcorr.tiltxcorr.ExcludeCentralPeak = 1\n" +
                                     $"runtime.Fiducials.any.trackingMethod = 0\n" +
                                     $"runtime.Fiducials.any.seedingMethod = 1\n" +
-                                    $"comparam.autofidseed.autofidseed.TargetNumberOfBeads = 50\n" +
+                                    $"comparam.autofidseed.autofidseed.TargetNumberOfBeads = {Options.TargetNBeads}\n" +
                                     $"comparam.align.tiltalign.MagOption = 0\n" +
                                     $"comparam.align.tiltalign.TiltOption = 0\n" +
                                     $"comparam.align.tiltalign.RotOption = {RotOption}\n" +
@@ -522,11 +526,13 @@ namespace WarpWorker
 
                     // we execute batchruntomo even if not doing fiducial tracking to create com file for alignment
                     bool IsWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+                    string BatchRunTomoExecutable = IsWindows ? "batchruntomo.cmd" : "batchruntomo";
+                    Console.WriteLine($"Running '{BatchRunTomoExecutable} {Arguments}'");
                     Process BatchRunTomo = new Process 
                     {
                         StartInfo =
                         {
-                            FileName = IsWindows ? "batchruntomo.cmd" : "batchruntomo",
+                            FileName = BatchRunTomoExecutable,
                             CreateNoWindow = false,
                             WindowStyle = ProcessWindowStyle.Minimized,
                             Arguments = Arguments,
@@ -549,12 +555,14 @@ namespace WarpWorker
                     // run alignment separately from batchruntomo to avoid expensive cross-validation calculations
                     if (Options.DoTiltAlign)
                     {
-                        Console.WriteLine($"Calculating projection parameters from patch tracking results in {T.TiltStackDir}");
+                        Console.WriteLine($"Calculating projection parameters from fiducial tracking results in {T.TiltStackDir}");
+                        string SubMfgExecutable = IsWindows ? "submfg.cmd" : "submfg";
+                        Console.WriteLine($"Running '{SubMfgExecutable} align.com'");
                         Process TiltAlign = new Process
                         {
                             StartInfo =
                             {
-                                FileName = IsWindows ? "submfg.cmd" : "submfg",
+                                FileName = SubMfgExecutable,
                                 CreateNoWindow = false,
                                 WindowStyle = ProcessWindowStyle.Minimized,
                                 Arguments = "align.com",
